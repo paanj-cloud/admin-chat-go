@@ -45,7 +45,8 @@ func (r *AdminConversationsResource) List() (map[string]interface{}, error) {
 }
 
 func (r *AdminConversationsResource) Get(conversationId string) (map[string]interface{}, error) {
-	return r.admin.GetHttpClient().Request("GET", fmt.Sprintf("/api/v1/admin/conversations/%s", conversationId), nil)
+	// JS SDK: GET /admin/conversations/:id (not /api/v1/admin/...)
+	return r.admin.GetHttpClient().Request("GET", fmt.Sprintf("/admin/conversations/%s", conversationId), nil)
 }
 
 // Users
