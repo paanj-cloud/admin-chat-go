@@ -5,7 +5,7 @@ package chatadmin
 import (
 	"fmt"
 
-	"github.com/paanj-cloud/paanj-go/admin"
+	"github.com/paanj-cloud/admin-go"
 )
 
 type AdminChat struct {

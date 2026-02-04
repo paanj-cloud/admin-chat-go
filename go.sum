@@ -1,0 +1,4 @@
+github.com/gorilla/websocket v1.5.3 h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aNNg=
+github.com/gorilla/websocket v1.5.3/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
+github.com/paanj-cloud/admin-go v0.1.0 h1:RCXZN5F7CGBSMvt3AcA3/Qu3ladPpZp+RPCTQ6PTLqo=
+github.com/paanj-cloud/admin-go v0.1.0/go.mod h1:nMnNK0KV+KxE1bOubf0YOgkFU6VsDHC/gx2D6iqquWA=
