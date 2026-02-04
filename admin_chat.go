@@ -39,16 +39,35 @@ func NewAdminConversationsResource(a *admin.PaanjAdmin) *AdminConversationsResou
 }
 
 func (r *AdminConversationsResource) Create(data map[string]interface{}) (map[string]interface{}, error) {
-	return r.admin.GetHttpClient().Request("POST", "/api/v1/admin/conversations", data)
+	return r.admin.GetHttpClient().Request("POST", "/admin/conversations", data)
 }
 
 func (r *AdminConversationsResource) List() (map[string]interface{}, error) {
-	return r.admin.GetHttpClient().Request("GET", "/api/v1/admin/conversations", nil)
+	return r.admin.GetHttpClient().Request("GET", "/admin/conversations", nil)
 }
 
 func (r *AdminConversationsResource) Get(conversationId string) (map[string]interface{}, error) {
-	// JS SDK: GET /admin/conversations/:id (not /api/v1/admin/...)
 	return r.admin.GetHttpClient().Request("GET", fmt.Sprintf("/admin/conversations/%s", conversationId), nil)
+}
+
+func (r *AdminConversationsResource) Update(conversationId string, data map[string]interface{}) (map[string]interface{}, error) {
+	return r.admin.GetHttpClient().Request("PATCH", fmt.Sprintf("/admin/conversations/%s", conversationId), data)
+}
+
+func (r *AdminConversationsResource) Delete(conversationId string) (map[string]interface{}, error) {
+	return r.admin.GetHttpClient().Request("DELETE", fmt.Sprintf("/admin/conversations/%s", conversationId), nil)
+}
+
+func (r *AdminConversationsResource) AddParticipant(conversationId string, data map[string]interface{}) (map[string]interface{}, error) {
+	return r.admin.GetHttpClient().Request("POST", fmt.Sprintf("/admin/conversations/%s/participants", conversationId), data)
+}
+
+func (r *AdminConversationsResource) RemoveParticipant(conversationId, userId string) (map[string]interface{}, error) {
+	return r.admin.GetHttpClient().Request("DELETE", fmt.Sprintf("/admin/conversations/%s/participants/%s", conversationId, userId), nil)
+}
+
+func (r *AdminConversationsResource) SendMessage(conversationId string, data map[string]interface{}) (map[string]interface{}, error) {
+	return r.admin.GetHttpClient().Request("POST", fmt.Sprintf("/admin/conversations/%s/messages", conversationId), data)
 }
 
 // Users
@@ -61,18 +80,33 @@ func NewAdminUsersResource(a *admin.PaanjAdmin) *AdminUsersResource {
 }
 
 func (r *AdminUsersResource) Create(data map[string]interface{}) (map[string]interface{}, error) {
-	return r.admin.GetHttpClient().Request("POST", "/api/v1/admin/users", data)
+	return r.admin.GetHttpClient().Request("POST", "/admin/users", data)
 }
 
 func (r *AdminUsersResource) Get(userId string) (map[string]interface{}, error) {
-	return r.admin.GetHttpClient().Request("GET", fmt.Sprintf("/api/v1/admin/users/%s", userId), nil)
+	return r.admin.GetHttpClient().Request("GET", fmt.Sprintf("/admin/users/%s", userId), nil)
 }
 
 func (r *AdminUsersResource) Block(blockerId, blockedId string) (map[string]interface{}, error) {
-	return r.admin.GetHttpClient().Request("POST", "/api/v1/admin/users/block", map[string]interface{}{
+	return r.admin.GetHttpClient().Request("POST", fmt.Sprintf("/admin/users/%s/block", blockedId), map[string]interface{}{
 		"blockerId": blockerId,
-		"blockedId": blockedId,
 	})
+}
+
+func (r *AdminUsersResource) Unblock(userId, blockedId string) (map[string]interface{}, error) {
+	return r.admin.GetHttpClient().Request("POST", fmt.Sprintf("/admin/users/%s/unblock", blockedId), nil)
+}
+
+func (r *AdminUsersResource) Update(userId string, data map[string]interface{}) (map[string]interface{}, error) {
+	return r.admin.GetHttpClient().Request("PATCH", fmt.Sprintf("/admin/users/%s", userId), data)
+}
+
+func (r *AdminUsersResource) Delete(userId string) (map[string]interface{}, error) {
+	return r.admin.GetHttpClient().Request("DELETE", fmt.Sprintf("/admin/users/%s", userId), nil)
+}
+
+func (r *AdminUsersResource) GetConversations(userId string) (map[string]interface{}, error) {
+	return r.admin.GetHttpClient().Request("GET", fmt.Sprintf("/admin/users/%s/conversations", userId), nil)
 }
 
 // Messages
