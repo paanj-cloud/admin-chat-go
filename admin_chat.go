@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/paanj-cloud/paanj-go/admin"
+	"github.com/paanj-cloud/admin-go"
 )
 
 type AdminChat struct {
